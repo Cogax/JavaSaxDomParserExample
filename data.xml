@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<connections>
+  <connection>
+    <date>2014-12-01</date>
+    <from>
+      <station>St. Gallen</station>
+      <time>12:11:00</time>
+      <track>1</track>  
+    </from>
+    <to>
+      <station>Zürich</station>
+      <time>13:23:00</time>
+      <rail>16</rail>  
+    </to>
+    <train>ICN</train>
+    <capacity>
+      <firstClass>1</firstClass>  
+      <secondClass>1</secondClass>
+    </capacity>
+    <note>Richtung: Genève</note>
+  </connection>
+</connections>
