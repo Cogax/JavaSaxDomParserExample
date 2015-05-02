@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<connections>
+<connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Users/andy/Projects/xmlExample/schema.xsd">
   <connection>
     <date>2014-12-01</date>
     <from>
@@ -8,14 +8,14 @@
       <track>1</track>  
     </from>
     <to>
-      <station>Zürich</station>
-      <time>13:23:00</time>
-      <rail>16</rail>  
+      <station>St. Gallen</station>
+      <time>12:11:00</time>
+      <track>1</track>  
     </to>
     <train>ICN</train>
     <capacity>
       <firstClass>1</firstClass>  
-      <secondClass>1</secondClass>
+      <secondClass>3</secondClass>
     </capacity>
     <note>Richtung: Genève</note>
   </connection>
