@@ -9,30 +9,41 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 
 import model.Connection;
 import model.ConnectionCapacity;
 import model.ConnectionDestination;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import parser.ConnectionsParserFactory;
 import parser.ConnectionsParserInterface;
 
+@RunWith(Parameterized.class)
 public class ConnectionsParserTests {
+
+	private String parserType;
 	private ConnectionsParserFactory parserFactory;
 
-	@Before
-	public void setUp() {
-		this.parserFactory = new ConnectionsParserFactory("DOM");
-		// this.parserFactory = new ConnectionsParserFactory("SAX");
+	@Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] { { "DOM" }, { "SAX" } });
+	}
+
+	public ConnectionsParserTests(String parserType) {
+		this.parserType = parserType;
+		this.parserFactory = new ConnectionsParserFactory();
 	}
 
 	@Test
 	public void testNotValidXMLDate() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("src/test/resources/notValidDate.xml"));
 		try {
 			parser.parse();
@@ -45,7 +56,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testNotValidXMLFrom() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("src/test/resources/notValidFrom.xml"));
 		try {
 			parser.parse();
@@ -58,7 +69,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testNotValidXMLTo() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("src/test/resources/notValidTo.xml"));
 		try {
 			parser.parse();
@@ -71,7 +82,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testNotValidXMLTrain() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("src/test/resources/notValidTrain.xml"));
 		try {
 			parser.parse();
@@ -84,7 +95,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testNotValidXMLCapacity() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("src/test/resources/notValidCapacity.xml"));
 		try {
 			parser.parse();
@@ -97,7 +108,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testValidXML() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("data.xml"));
 		try {
 			parser.parse();
@@ -110,7 +121,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testCountConnections() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("src/test/resources/multipleConnections.xml"));
 		try {
 			parser.parse();
@@ -123,7 +134,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testConnectionDate() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("data.xml"));
 		try {
 			parser.parse();
@@ -143,7 +154,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testConnectionFrom() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("data.xml"));
 		try {
 			parser.parse();
@@ -170,7 +181,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testConnectionTo() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("data.xml"));
 		try {
 			parser.parse();
@@ -197,7 +208,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testConnectionTrain() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("data.xml"));
 		try {
 			parser.parse();
@@ -213,7 +224,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testConnectionCapacity() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("data.xml"));
 		try {
 			parser.parse();
@@ -231,7 +242,7 @@ public class ConnectionsParserTests {
 
 	@Test
 	public void testConnectionNote() {
-		ConnectionsParserInterface parser = parserFactory.getParser();
+		ConnectionsParserInterface parser = parserFactory.getParser(parserType);
 		parser.setXMLFile(new File("data.xml"));
 		try {
 			parser.parse();

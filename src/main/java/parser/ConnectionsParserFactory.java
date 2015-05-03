@@ -4,16 +4,11 @@ import parser.dom.ConnectionsDOMParser;
 import parser.sax.ConnectionsSAXParser;
 
 public class ConnectionsParserFactory {
-	private String deliverOnly;
-
-	public ConnectionsParserFactory(String deliverOnlyParserOfType) {
-		this.deliverOnly = deliverOnlyParserOfType;
-	}
-
-	public ConnectionsParserInterface getParser() {
-		if (deliverOnly == "DOM")
+	public ConnectionsParserInterface getParser(String parserType) {
+		if (parserType == "DOM") {
 			return new ConnectionsDOMParser();
-		else
+		} else {
 			return new ConnectionsSAXParser();
+		}
 	}
 }
