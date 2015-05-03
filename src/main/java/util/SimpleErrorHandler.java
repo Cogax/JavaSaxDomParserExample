@@ -1,3 +1,6 @@
+/**
+ * @author Andreas Gyr <andygyr@gmx.ch>
+ */
 package util;
 
 import org.xml.sax.ErrorHandler;

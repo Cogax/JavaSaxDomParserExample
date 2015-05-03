@@ -1,3 +1,6 @@
+/**
+ * @author Andreas Gyr <andygyr@gmx.ch>
+ */
 package xmlexample;
 
 import static org.junit.Assert.assertEquals;

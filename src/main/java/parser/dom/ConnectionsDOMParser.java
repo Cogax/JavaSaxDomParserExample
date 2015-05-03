@@ -1,3 +1,6 @@
+/**
+ * @author Andreas Gyr <andygyr@gmx.ch>
+ */
 package parser.dom;
 
 import java.io.File;

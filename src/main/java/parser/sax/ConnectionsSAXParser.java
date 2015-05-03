@@ -1,3 +1,6 @@
+/**
+ * @author Andreas Gyr <andygyr@gmx.ch>
+ */
 package parser.sax;
 
 import java.io.File;
