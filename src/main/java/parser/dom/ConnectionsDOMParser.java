@@ -1,6 +1,7 @@
 package parser.dom;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import model.Connection;
 import model.ConnectionCapacity;
@@ -19,6 +21,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import parser.ConnectionsParserInterface;
 import util.SimpleErrorHandler;
@@ -37,16 +40,7 @@ public class ConnectionsDOMParser implements ConnectionsParserInterface {
 
 	public void parse() throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setValidating(true);
-		factory.setNamespaceAware(true);
-		factory.setAttribute(
-				"http://java.sun.com/xml/jaxp/properties/schemaLanguage",
-				"http://www.w3.org/2001/XMLSchema");
-
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		builder.setErrorHandler(new SimpleErrorHandler());
-		Document document = builder.parse(xmlFile);
-		document.getDocumentElement().normalize();
+		Document document = getValidDocument(xmlFile, factory);
 
 		NodeList connectionNodes = document.getElementsByTagName("connection");
 		for (int i = 0; i < connectionNodes.getLength(); i++) {
@@ -82,6 +76,42 @@ public class ConnectionsDOMParser implements ConnectionsParserInterface {
 	}
 
 	/**
+	 * ------------------------------------------------------------------------
+	 * The following methods are public and static for reusability reasons. I
+	 * tried to implement the method dependency injection pattern.
+	 * ------------------------------------------------------------------------
+	 */
+
+	/**
+	 * If the xmlFile is valid it creates a Document, otherwise it will throw
+	 * Exceptions.
+	 * 
+	 * @param xmlFile
+	 *            XML Source File
+	 * @param factory
+	 *            Factory for Document Builder
+	 * @return A validated Document or Exceptions
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	public static Document getValidDocument(File xmlFile,
+			DocumentBuilderFactory factory)
+			throws ParserConfigurationException, SAXException, IOException {
+		factory.setValidating(true);
+		factory.setNamespaceAware(true);
+		factory.setAttribute(
+				"http://java.sun.com/xml/jaxp/properties/schemaLanguage",
+				"http://www.w3.org/2001/XMLSchema");
+
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		builder.setErrorHandler(new SimpleErrorHandler());
+		Document document = builder.parse(xmlFile);
+		document.getDocumentElement().normalize();
+		return document;
+	}
+
+	/**
 	 * Creates an ConnectionDestionation object from given parent Element.
 	 * 
 	 * @param parentElement
@@ -92,9 +122,8 @@ public class ConnectionsDOMParser implements ConnectionsParserInterface {
 	 * @throws DOMException
 	 * @throws ParseException
 	 */
-	private static ConnectionDestination parseDestination(
-			Element parentElement, String destinationTagName)
-			throws DOMException, ParseException {
+	public static ConnectionDestination parseDestination(Element parentElement,
+			String destinationTagName) throws DOMException, ParseException {
 
 		// get element by the given destinationTagName
 		Node destinationNode = parentElement.getElementsByTagName(
@@ -127,7 +156,7 @@ public class ConnectionsDOMParser implements ConnectionsParserInterface {
 	 *            Element of parent node
 	 * @return An ConnectionCapacity object
 	 */
-	private static ConnectionCapacity parseCapacity(Element parentElement) {
+	public static ConnectionCapacity parseCapacity(Element parentElement) {
 
 		// get capacity element
 		Node capacityNode = parentElement.getElementsByTagName("capacity")
@@ -156,7 +185,7 @@ public class ConnectionsDOMParser implements ConnectionsParserInterface {
 	 *            Element of parent node
 	 * @return Note String
 	 */
-	private static String parseNote(Element parentElement) {
+	public static String parseNote(Element parentElement) {
 
 		String note = new String();
 		NodeList noteNodes = parentElement.getElementsByTagName("note");

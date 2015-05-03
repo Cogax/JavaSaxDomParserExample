@@ -26,8 +26,8 @@ public class ConnectionsParserTests {
 
 	@Before
 	public void setUp() {
-		// this.parserFactory = new ConnectionsParserFactory("DOM");
-		this.parserFactory = new ConnectionsParserFactory("SAX");
+		this.parserFactory = new ConnectionsParserFactory("DOM");
+		// this.parserFactory = new ConnectionsParserFactory("SAX");
 	}
 
 	@Test
