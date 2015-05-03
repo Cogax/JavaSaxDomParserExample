@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../schema.xsd">
+  <connection>
+    <date>2014-12-01</date>
+    <from>
+      <station>St. Gallen</station>
+      <time>12:11:00</time>
+      <track>1</track>  
+    </from>
+    <to>
+      <station>Zürich</station>
+      <time>15:11:00:99</time>
+      <track>1</track>  
+    </to>
+    <train>ICN</train>
+    <capacity>
+      <firstClass>1</firstClass>  
+      <secondClass>3</secondClass>
+    </capacity>
+    <note>Richtung: Genève</note>
+  </connection>
+</connections>
