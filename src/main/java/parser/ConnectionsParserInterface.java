@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import model.Connection;
 
-public interface ParserInterface {
+public interface ConnectionsParserInterface {
 	public void setXMLFile(File xmlFile);
 
 	public void parse() throws Exception;

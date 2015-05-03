@@ -1,4 +1,4 @@
-package parser;
+package parser.dom;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -20,13 +20,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import parser.ConnectionsParserInterface;
 import util.SimpleErrorHandler;
 
-public class DOMParser implements ParserInterface {
+public class ConnectionsDOMParser implements ConnectionsParserInterface {
 	private File xmlFile;
 	private ArrayList<Connection> connections;
 
-	public DOMParser() {
+	public ConnectionsDOMParser() {
 		connections = new ArrayList<Connection>();
 	}
 
